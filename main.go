@@ -14,17 +14,6 @@ func main() {
 	input := bufio.NewScanner(os.Stdin)
 	input.Scan()
 
-	//
-	//	str := `{
-	//      "str": "foo",
-	//      "num": 100,
-	//      "bool": false,
-	//      "null": null,
-	//      "array": ["foo", "bar", "baz"],
-	//      "obj": { "a": 1, "b": 2 }
-	//    }`
-	//
-	//
 	var obj map[string]interface{}
 	json.Unmarshal(input.Bytes(), &obj)
 
@@ -33,9 +22,9 @@ func main() {
 	f.Indent = 4
 
 	// Marshall the Colorized JSON
-	s, err := f.Marshal(obj)
-	if err != nil {
-		fmt.Printf("%v+\n", obj)
+	s, _ := f.Marshal(obj)
+	if len(string(s)) < 10 {
+		fmt.Println(input.Text())
 		return
 	}
 
